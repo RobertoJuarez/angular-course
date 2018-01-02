@@ -4,7 +4,7 @@
 
 <input type="text"
        class="form-control"
-       (input)="this.handleServerNameInput( $event )">
+       [(ngModel)]="this.serverNameInput">
 
 <p>{{ this.serverNameInput }}</p>
 
