@@ -1,4 +1,13 @@
 
+
+<label>Server Name</label>
+
+<input type="text"
+       class="form-control"
+       (input)="this.handleServerNameInput( $event )">
+
+<p>{{ this.serverNameInput }}</p>
+
 <button class="btn btn-primary"
         (click)="this.handleAddServerButtonClick()">Add Server</button>
 

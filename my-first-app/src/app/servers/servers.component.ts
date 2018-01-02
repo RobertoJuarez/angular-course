@@ -11,6 +11,7 @@ export class ServersComponent implements OnInit {
 
   private _serverAdditionStatus: string;
 
+  private _serverNameInput: string;
 
   constructor() {
 
@@ -47,9 +48,27 @@ export class ServersComponent implements OnInit {
   }
 
 
+  get serverNameInput(): string {
+
+    return this._serverNameInput;
+  }
+
+
+  set serverNameInput( value: string ) {
+
+    this._serverNameInput = value;
+  }
+
+
   public handleAddServerButtonClick() {
 
     this.serverAdditionStatus = 'A new server was added';
+  }
+
+
+  public handleServerNameInput( event: Event ) {
+
+    this.serverNameInput = ( < HTMLInputElement >event.target ).value;
   }
 
 }
