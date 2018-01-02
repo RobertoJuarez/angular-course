@@ -4,6 +4,10 @@
 
 <input type="text"
        class="form-control"
+       (input)="this.handleServerNameInput( $event )">
+
+<input type="text"
+       class="form-control"
        [(ngModel)]="this.serverNameInput">
 
 <p>{{ this.serverNameInput }}</p>
