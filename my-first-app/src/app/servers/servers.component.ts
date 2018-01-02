@@ -13,12 +13,16 @@ export class ServersComponent implements OnInit {
 
   private _serverNameInput: string;
 
+  private _serverAddedCondition: boolean;
+
 
   constructor() {
 
     this._addServerButtonDisabled = true;
 
     this._serverAdditionStatus = 'No server added so far';
+
+    this._serverAddedCondition = false;
   }
 
 
@@ -61,9 +65,21 @@ export class ServersComponent implements OnInit {
   }
 
 
+  get serverAddedCondition(): boolean {
+    return this._serverAddedCondition;
+  }
+
+
+  set serverAddedCondition( value: boolean ) {
+    this._serverAddedCondition = value;
+  }
+
+
   public handleAddServerButtonClick() {
 
     this.serverAdditionStatus = `A new server was added. Server name is ${this.serverNameInput}`;
+
+    this.serverAddedCondition = true;
   }
 
 }

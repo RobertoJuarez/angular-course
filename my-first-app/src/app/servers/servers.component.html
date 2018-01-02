@@ -9,4 +9,4 @@
 <button class="btn btn-primary"
         (click)="this.handleAddServerButtonClick()">Add Server</button>
 
-<p>{{ this.serverAdditionStatus }}</p>
+<p *ngIf="this.serverAddedCondition">{{ this.serverAdditionStatus }}</p>
