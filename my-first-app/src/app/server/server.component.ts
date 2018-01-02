@@ -13,11 +13,12 @@ export class ServerComponent implements OnInit {
 
   private _status: string;
 
+
   constructor() {
 
     this._id = 10;
 
-    this._status = 'offline';
+    this._status = Math.random() > 0.5 ? 'online' : 'offline';
   }
 
 
@@ -36,4 +37,9 @@ export class ServerComponent implements OnInit {
     return this._status;
   }
 
+
+  public getBackgroundColor(): string {
+
+    return this.status === 'online' ? 'green' : 'red';
+  }
 }
