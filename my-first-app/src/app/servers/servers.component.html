@@ -1,9 +1,5 @@
 
 <button class="btn btn-primary"
-        [disabled]="this.addServerButtonDisabled">Add Server</button>
+        (click)="this.handleAddServerButtonClick()">Add Server</button>
 
-<p>{{ this.addServerButtonDisabled }}</p>
-
-<app-server></app-server>
-
-<app-server></app-server>
+<p>{{ this.serverAdditionStatus }}</p>

@@ -7,13 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServersComponent implements OnInit {
 
-
   private _addServerButtonDisabled: boolean;
+
+  private _serverAdditionStatus: string;
 
 
   constructor() {
 
     this._addServerButtonDisabled = true;
+
+    this._serverAdditionStatus = 'No server added so far';
   }
 
 
@@ -30,6 +33,23 @@ export class ServersComponent implements OnInit {
   set addServerButtonDisabled( value: boolean ) {
 
     this._addServerButtonDisabled = value;
+  }
+
+
+  get serverAdditionStatus(): string {
+
+    return this._serverAdditionStatus;
+  }
+
+  set serverAdditionStatus( value: string ) {
+
+    this._serverAdditionStatus = value;
+  }
+
+
+  public handleAddServerButtonClick() {
+
+    this.serverAdditionStatus = 'A new server was added';
   }
 
 }
