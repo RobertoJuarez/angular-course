@@ -11,6 +11,4 @@
 
 <p *ngIf="this.serverAddedCondition">{{ this.serverAdditionStatus }}</p>
 
-<app-server></app-server>
-
-<app-server></app-server>
+<app-server *ngFor="let server of this.servers"></app-server>
