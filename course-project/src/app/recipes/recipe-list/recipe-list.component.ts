@@ -15,7 +15,12 @@ export class RecipeListComponent implements OnInit {
 
   constructor() {
 
-    this._recipes = [];
+    this._recipes = [
+     new RecipeModel( 'one', 'the  first ', 'some path' ),
+     new RecipeModel( 'two', 'the second', 'some path' ),
+     new RecipeModel( 'three', 'the third', 'some path' ),
+      new RecipeModel( 'fourth', 'the fourth', 'some path' )
+    ];
   }
 
 

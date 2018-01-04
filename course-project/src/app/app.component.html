@@ -1,14 +1,14 @@
 <div class="container">
 
-  <app-header></app-header>
+  <app-header (selectedSectionEvent)="this.handleSelectedSectionEvent( $event )"></app-header>
 
   <div class="row">
 
     <div class="col-md-12">
 
-      <app-recipes></app-recipes>
+      <app-recipes *ngIf="this.currentSection === this.applicationSections.Recipes"></app-recipes>
 
-      <app-shopping></app-shopping>
+      <app-shopping *ngIf="this.currentSection === this.applicationSections.Shopping"></app-shopping>
 
     </div>
 

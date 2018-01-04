@@ -13,7 +13,7 @@
 
   <div class="col-xs-12">
 
-    <app-recipe-item *ngFor="let recipe of this.recipes"></app-recipe-item>
+    <app-recipe-item *ngFor="let recipe of this.recipes" [model]="recipe"></app-recipe-item>
 
   </div>
 
