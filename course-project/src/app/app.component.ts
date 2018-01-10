@@ -10,10 +10,14 @@ import { SelectedSectionEvent } from './shared/selected-section-event';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent extends BaseComponent {
+  get someValue(): number {
+    return this._someValue;
+  }
 
 
   private _currentSection: Section;
 
+  private _someValue: number;
 
   constructor() {
     super();
