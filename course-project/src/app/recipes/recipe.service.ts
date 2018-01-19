@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { RecipeModel } from './recipe-model';
+import { RecipeSelectedEvent } from './recipe-selected-event';
 
 
 
 @Injectable()
 export class RecipeService {
 
-
   private _recipes: RecipeModel[];
+
+  private _recipeSelectedEventEmitter: EventEmitter< RecipeSelectedEvent >;
+
 
 
   constructor() {
 
     this.initiateRecipes();
+
+    this._recipeSelectedEventEmitter = new EventEmitter<RecipeSelectedEvent>();
   }
 
 
@@ -28,6 +33,13 @@ export class RecipeService {
   get recipes(): RecipeModel[] {
 
     return this._recipes.slice();
+  }
+
+
+  @Output( 'recipeSelectedEvent' )
+  get recipeSelectedEventEmitter(): EventEmitter< RecipeSelectedEvent > {
+
+    return this._recipeSelectedEventEmitter;
   }
 
 }

@@ -15,9 +15,12 @@ export class RecipesComponent implements OnInit {
   private _selectedRecipe: RecipeModel;
 
 
-  constructor() { }
+  constructor( private recipeService: RecipeService ) { }
+
 
   ngOnInit() {
+
+    this.recipeService.recipeSelectedEventEmitter.subscribe( ( event: RecipeSelectedEvent )  => this.handleRecipeSelectedEvent( event ) );
   }
 
 
@@ -26,13 +29,14 @@ export class RecipesComponent implements OnInit {
     return this._selectedRecipe;
   }
 
+
   set selectedRecipe( value: RecipeModel ) {
 
     this._selectedRecipe = value;
   }
 
 
-  public handleRecipeSelectedEvent( recipeSelectedEvent: RecipeSelectedEvent ): void {
+  private handleRecipeSelectedEvent( recipeSelectedEvent: RecipeSelectedEvent ): void {
 
     this.selectedRecipe = recipeSelectedEvent.recipe;
   }

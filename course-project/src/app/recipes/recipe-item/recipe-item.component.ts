@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RecipeModel } from '../recipe-model';
 import { RecipeSelectedEvent } from '../recipe-selected-event';
 import { BaseComponent } from '../../shared/base-component';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -13,13 +14,9 @@ export class RecipeItemComponent extends BaseComponent implements OnInit {
 
   private _model: RecipeModel;
 
-  private _recipeSelectedEventEmitter: EventEmitter< RecipeSelectedEvent >;
 
-
-  constructor() {
+  constructor( private recipeService: RecipeService ) {
     super();
-
-    this._recipeSelectedEventEmitter = new EventEmitter<RecipeSelectedEvent>();
   }
 
 
@@ -38,16 +35,9 @@ export class RecipeItemComponent extends BaseComponent implements OnInit {
   }
 
 
-  @Output( 'recipeSelectedEvent' )
-  get recipeSelectedEventEmitter(): EventEmitter< RecipeSelectedEvent > {
-
-    return this._recipeSelectedEventEmitter;
-  }
-
-
   public handleRecipeLinkClick(): void {
 
-    this.recipeSelectedEventEmitter.emit( new RecipeSelectedEvent( this._model ) );
+    this.recipeService.recipeSelectedEventEmitter.emit( new RecipeSelectedEvent( this._model ) );
   }
 
 }
