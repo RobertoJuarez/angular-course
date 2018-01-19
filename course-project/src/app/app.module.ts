@@ -13,6 +13,7 @@ import { ShoppingListComponent } from './shopping/shopping-list/shopping-list.co
 import { HighlightDirective } from './directives/highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
+import { ShoppingService } from './shopping/shopping.service';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { DropdownDirective } from './directives/dropdown.directive';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    ShoppingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
