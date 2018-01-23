@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { RecipeModel } from './recipe-model';
 import { RecipeSelectedEvent } from './recipe-selected-event';
+import { IngredientModel } from '../shared/ingredient-model';
 
 
 
@@ -23,9 +24,14 @@ export class RecipeService {
 
   private initiateRecipes(): void {
     this._recipes = [
-      new RecipeModel( 'Brownie', 'Mmm, so tasty!', 'https://upload.wikimedia.org/wikipedia/commons/7/74/Brownies_recipe.png' ),
-      new RecipeModel( 'Egg Fry', 'It may be goot at night', 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Egg_Fry_Recipe.png' ),
-      new RecipeModel( 'Potatoes', 'They are so cute!', 'https://upload.wikimedia.org/wikipedia/commons/4/42/Potatoes.png' )
+      new RecipeModel( 'Brownie', 'Mmm, so tasty!', 'https://upload.wikimedia.org/wikipedia/commons/7/74/Brownies_recipe.png',
+        [ new IngredientModel( 'Chocolate', 4 ), new IngredientModel( 'Bread', 12 ) ] ),
+
+      new RecipeModel( 'Egg Fry', 'It may be goot at night', 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Egg_Fry_Recipe.png',
+        [ new IngredientModel( 'Eggs', 2 ), new IngredientModel( 'French Fries', 20 ) ] ),
+
+      new RecipeModel( 'Potatoes', 'They are so cute!', 'https://upload.wikimedia.org/wikipedia/commons/4/42/Potatoes.png',
+        [ new IngredientModel( 'Potatoes', 4 ), new IngredientModel( 'Sauce', 6 ) ] ),
     ];
   }
 

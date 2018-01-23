@@ -62,7 +62,15 @@
 
   <div class="col-xs-12">
 
-    Recipe Ingredients
+    <ul class="list-group">
+
+      <li
+        class="list-group-item"
+        *ngFor="let ingredient of this.model.ingredients">
+        {{ ingredient.name }} - {{ingredient.amount }}
+      </li>
+
+    </ul>
 
   </div>
 

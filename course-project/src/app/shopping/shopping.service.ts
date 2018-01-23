@@ -45,9 +45,9 @@ export class ShoppingService {
 
   deleteIngredient( ingredient: IngredientModel ): void {
 
-    let ingredientIndex = 0;
+    let ingredientIndex = -1;
 
-    for( let k: number; k < this._ingredients.length; k++ ) {
+    for( let k = 0; k < this._ingredients.length; k++ ) {
 
       if( this._ingredients[ k ].name === ingredient.name && this._ingredients[ k ].amount === ingredient.amount ) {
 
@@ -57,7 +57,10 @@ export class ShoppingService {
       }
     }
 
-    this._ingredients.splice( ingredientIndex, 1 );
+    if( ingredientIndex > -1 ) {
+
+      this._ingredients.splice( ingredientIndex, 1 );
+    }
   }
 
 
