@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IngredientModel } from '../../shared/ingredient-model';
 import { BaseComponent } from '../../shared/base-component';
+import { ShoppingService } from '../shopping.service';
+import { IngredientAddedEvent } from '../ingredient-added-event';
+import { IngredientDeletedEvent } from '../ingredient-deleted-event';
+import { IngredientListClearedEvent } from '../ingredient-list-cleared-event';
 
 @Component({
   selector: 'app-shopping-list',
@@ -10,31 +14,42 @@ import { BaseComponent } from '../../shared/base-component';
 export class ShoppingListComponent extends BaseComponent implements OnInit {
 
 
-  private _ingredients: IngredientModel[];
-
-
-  constructor() {
-
+  constructor( private shoppingService: ShoppingService ) {
     super();
-
-    this._ingredients = [];
   }
 
 
   ngOnInit() {
+
+    this.shoppingService.ingredientAddedEventEmitter.subscribe( event => this.handleIngredientAddedEvent( event ) );
+
+    this.shoppingService.ingredientDeletedEventEmitter.subscribe( event => this.handleIngredientDeletedEvent( event ) );
+
+    this.shoppingService.ingredientListClearedEventEmitter.subscribe( event => this.handleIngredientListClearedEvent( event ) );
   }
 
 
-  @Input()
   get ingredients(): IngredientModel[] {
 
-    return this._ingredients;
+    return this.shoppingService.ingredients;
   }
 
 
-  set ingredients( value: IngredientModel[] ) {
+  private handleIngredientAddedEvent( event: IngredientAddedEvent ): void {
 
-    this._ingredients = value;
+    this.shoppingService.addIngredient( event.ingredient );
+  }
+
+
+  private handleIngredientDeletedEvent( event: IngredientDeletedEvent ): void {
+
+    this.shoppingService.deleteIngredient( event.ingredient );
+  }
+
+
+  private handleIngredientListClearedEvent( event: IngredientListClearedEvent ): void {
+
+    this.shoppingService.clearIngredients();
   }
 
 }

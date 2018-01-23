@@ -37,6 +37,36 @@ export class ShoppingService {
   }
 
 
+  addIngredient( ingredient: IngredientModel ): void {
+
+    this._ingredients.push( ingredient );
+  }
+
+
+  deleteIngredient( ingredient: IngredientModel ): void {
+
+    let ingredientIndex = 0;
+
+    for( let k: number; k < this._ingredients.length; k++ ) {
+
+      if( this._ingredients[ k ].name === ingredient.name && this._ingredients[ k ].amount === ingredient.amount ) {
+
+        ingredientIndex = k;
+
+        break;
+      }
+    }
+
+    this._ingredients.splice( ingredientIndex, 1 );
+  }
+
+
+  clearIngredients(): void {
+
+    this._ingredients = [];
+  }
+
+
   @Output( 'ingredientAddedEvent' )
   get ingredientAddedEventEmitter(): EventEmitter< IngredientAddedEvent > {
 
