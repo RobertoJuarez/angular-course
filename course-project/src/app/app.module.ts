@@ -14,6 +14,15 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { ShoppingService } from './shopping/shopping.service';
+import { RouterModule, Routes } from '@angular/router';
+
+
+const applicationRoutes: Routes = [
+
+  { path: 'recipes', component: RecipesComponent },
+
+  { path: 'shopping', component: ShoppingComponent }
+];
 
 
 @NgModule({
@@ -32,7 +41,8 @@ import { ShoppingService } from './shopping/shopping.service';
     DropdownDirective
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot( applicationRoutes )
   ],
   providers: [
     ShoppingService

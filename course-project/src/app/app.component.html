@@ -6,9 +6,7 @@
 
     <div class="col-md-12">
 
-      <app-recipes *ngIf="this.currentSection === this.applicationSections.Recipes"></app-recipes>
-
-      <app-shopping *ngIf="this.currentSection === this.applicationSections.Shopping"></app-shopping>
+      <router-outlet></router-outlet>
 
     </div>
 
