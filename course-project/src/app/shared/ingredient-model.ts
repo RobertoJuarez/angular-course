@@ -1,4 +1,5 @@
 
+
 export class IngredientModel {
 
   private _name: string;

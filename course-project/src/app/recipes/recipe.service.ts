@@ -23,6 +23,7 @@ export class RecipeService {
 
 
   private initiateRecipes(): void {
+
     this._recipes = [
       new RecipeModel( 'Brownie', 'Mmm, so tasty!', 'https://upload.wikimedia.org/wikipedia/commons/7/74/Brownies_recipe.png',
         [ new IngredientModel( 'Chocolate', 4 ), new IngredientModel( 'Bread', 12 ) ] ),
