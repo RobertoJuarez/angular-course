@@ -14,14 +14,18 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { ShoppingService } from './shopping/shopping.service';
+import { HomeComponent } from './home/home.component';
+import { AppRoutes } from './app-routes';
 import { RouterModule, Routes } from '@angular/router';
 
 
-const applicationRoutes: Routes = [
+const APPLICATION_ROUTES: Routes = [
 
-  { path: 'recipes', component: RecipesComponent },
+  { path: AppRoutes.HOME, component: HomeComponent },
 
-  { path: 'shopping', component: ShoppingComponent }
+  { path: AppRoutes.RECIPES, component: RecipesComponent },
+
+  { path: AppRoutes.SHOPPING, component: ShoppingComponent }
 ];
 
 
@@ -38,11 +42,12 @@ const applicationRoutes: Routes = [
     ShoppingListComponent,
     HighlightDirective,
     UnlessDirective,
-    DropdownDirective
+    DropdownDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot( applicationRoutes )
+    RouterModule.forRoot( APPLICATION_ROUTES )
   ],
   providers: [
     ShoppingService
