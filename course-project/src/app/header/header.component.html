@@ -12,13 +12,24 @@
 
       <ul class="nav navbar-nav">
 
-        <li href="#">
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/">Home</a>
+        </li>
+
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
           <a routerLink="/recipes">Recipes</a>
         </li>
 
-        <li href="#">
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
           <a routerLink="/shopping">Shopping</a>
         </li>
+
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
