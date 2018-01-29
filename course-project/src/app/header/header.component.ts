@@ -1,6 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { SelectedSectionEvent } from '../shared/selected-section-event';
-import { Section } from '../shared/section.enum';
+import { Component } from '@angular/core';
 import { BaseComponent } from '../shared/base-component';
 
 @Component({
@@ -8,33 +6,11 @@ import { BaseComponent } from '../shared/base-component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent extends BaseComponent implements OnInit {
-
-
-  private _selectedSectionEventEmitter: EventEmitter< SelectedSectionEvent >;
+export class HeaderComponent extends BaseComponent {
 
 
   constructor() {
     super();
-
-    this._selectedSectionEventEmitter = new EventEmitter< SelectedSectionEvent >();
-  }
-
-
-  ngOnInit() {
-  }
-
-
-  @Output( 'selectedSectionEvent' )
-  get selectedSectionEventEmitter(): EventEmitter< SelectedSectionEvent > {
-
-    return this._selectedSectionEventEmitter;
-  }
-
-
-  public handleSectionLinkClick( selectedSection: Section ): void {
-
-    this.selectedSectionEventEmitter.emit( new SelectedSectionEvent( selectedSection ) );
   }
 
 }
