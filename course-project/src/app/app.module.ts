@@ -23,9 +23,10 @@ const APPLICATION_ROUTES: Routes = [
 
   { path: AppRoutes.HOME, component: HomeComponent },
 
-  { path: AppRoutes.RECIPES, component: RecipesComponent },
+  { path: AppRoutes.RECIPES, component: RecipesComponent, children: [
 
-  { path: AppRoutes.RECIPES + '/:id', component: RecipesComponent },
+    { path: ':id', component: RecipeDetailComponent }
+    ] },
 
   { path: AppRoutes.SHOPPING, component: ShoppingComponent }
 ];
