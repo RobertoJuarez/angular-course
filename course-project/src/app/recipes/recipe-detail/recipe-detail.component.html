@@ -1,4 +1,9 @@
-<div class="row">
+
+<ng-template #infoText>
+  <p>Please select a recipe</p>
+</ng-template>
+
+<div class="row" *ngIf="this.model; else infoText">
 
   <div class="col-xs-12">
 

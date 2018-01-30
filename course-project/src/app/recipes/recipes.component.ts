@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { RecipeSelectedEvent } from './recipe-selected-event';
-import { RecipeModel } from './recipe-model';
+import { Component } from '@angular/core';
 import { RecipeService } from './recipe.service';
+import { BaseComponent } from '../shared/base-component';
 
 @Component({
   selector: 'app-recipes',
@@ -9,37 +8,10 @@ import { RecipeService } from './recipe.service';
   styleUrls: ['./recipes.component.css'],
   providers: [ RecipeService ]
 })
-export class RecipesComponent implements OnInit {
+export class RecipesComponent extends BaseComponent {
 
-
-  private _selectedRecipe: RecipeModel;
-
-
-  constructor( private recipeService: RecipeService ) { }
-
-
-  ngOnInit() {
-
-    this.recipeService.recipeSelectedEventEmitter.subscribe( ( event: RecipeSelectedEvent )  => this.handleRecipeSelectedEvent( event ) );
+  constructor() {
+    super();
   }
-
-
-  get selectedRecipe(): RecipeModel {
-
-    return this._selectedRecipe;
-  }
-
-
-  set selectedRecipe( value: RecipeModel ) {
-
-    this._selectedRecipe = value;
-  }
-
-
-  private handleRecipeSelectedEvent( recipeSelectedEvent: RecipeSelectedEvent ): void {
-
-    this.selectedRecipe = recipeSelectedEvent.recipe;
-  }
-
 
 }

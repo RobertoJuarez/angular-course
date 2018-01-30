@@ -3,6 +3,8 @@ import { IngredientModel } from '../shared/ingredient-model';
 
 export class RecipeModel {
 
+  private _id: string;
+
   private _name: string;
 
   private _description: string;
@@ -12,10 +14,13 @@ export class RecipeModel {
   private _ingredients: IngredientModel[];
 
 
-  constructor( name: string,
+  constructor( id: string,
+               name: string,
                description: string,
                imagePath: string,
                ingredients: IngredientModel[] ) {
+
+    this._id = id;
 
     this._name = name;
 
@@ -26,6 +31,10 @@ export class RecipeModel {
     this._ingredients = ingredients;
   }
 
+
+  get id(): string {
+    return this._id;
+  }
 
   get name(): string {
     return this._name;

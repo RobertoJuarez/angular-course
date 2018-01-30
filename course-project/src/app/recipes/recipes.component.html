@@ -8,12 +8,8 @@
 
   <div class="col-md-7">
 
-    <app-recipe-detail
-      [model]="this.selectedRecipe"
-      *ngIf="this.selectedRecipe; else infoText"></app-recipe-detail>
-    <ng-template #infoText>
-      <p>Please select a recipe</p>
-    </ng-template>
+    <app-recipe-detail></app-recipe-detail>
+
   </div>
 
 </div>

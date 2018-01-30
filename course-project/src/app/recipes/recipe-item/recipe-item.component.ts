@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RecipeModel } from '../recipe-model';
-import { RecipeSelectedEvent } from '../recipe-selected-event';
 import { BaseComponent } from '../../shared/base-component';
-import { RecipeService } from '../recipe.service';
+import { Router } from '@angular/router';
+import { AppRoutes } from '../../app-routes';
 
 @Component({
   selector: 'app-recipe-item',
@@ -15,7 +15,7 @@ export class RecipeItemComponent extends BaseComponent implements OnInit {
   private _model: RecipeModel;
 
 
-  constructor( private recipeService: RecipeService ) {
+  constructor( private router: Router ) {
     super();
   }
 
@@ -37,7 +37,7 @@ export class RecipeItemComponent extends BaseComponent implements OnInit {
 
   public handleRecipeLinkClick(): void {
 
-    this.recipeService.recipeSelectedEventEmitter.emit( new RecipeSelectedEvent( this._model ) );
+    this.router.navigate( [ AppRoutes.RECIPES + '/' + this._model.id ]  );
   }
 
 }
