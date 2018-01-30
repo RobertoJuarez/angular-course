@@ -15,21 +15,7 @@ import { UnlessDirective } from './directives/unless.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { ShoppingService } from './shopping/shopping.service';
 import { HomeComponent } from './home/home.component';
-import { AppRoutes } from './app-routes';
-import { RouterModule, Routes } from '@angular/router';
-
-
-const APPLICATION_ROUTES: Routes = [
-
-  { path: AppRoutes.HOME, component: HomeComponent },
-
-  { path: AppRoutes.RECIPES, component: RecipesComponent, children: [
-
-    { path: ':id', component: RecipeDetailComponent }
-    ] },
-
-  { path: AppRoutes.SHOPPING, component: ShoppingComponent }
-];
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 
 @NgModule({
@@ -50,7 +36,7 @@ const APPLICATION_ROUTES: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot( APPLICATION_ROUTES )
+    AppRoutingModule
   ],
   providers: [
     ShoppingService
