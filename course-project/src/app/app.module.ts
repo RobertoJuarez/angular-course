@@ -16,6 +16,8 @@ import { DropdownDirective } from './directives/dropdown.directive';
 import { ShoppingService } from './shopping/shopping.service';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AppRoutingModule
   ],
   providers: [
-    ShoppingService
+    ShoppingService,
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

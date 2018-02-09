@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { RecipesComponent } from '../recipes/recipes.component';
 import { RecipeDetailComponent } from '../recipes/recipe-detail/recipe-detail.component';
 import { ShoppingComponent } from '../shopping/shopping.component';
+import { AuthGuardService } from '../shared/services/auth-guard.service';
 
 
 const APPLICATION_ROUTES: Routes = [
@@ -16,7 +17,7 @@ const APPLICATION_ROUTES: Routes = [
     { path: ':id', component: RecipeDetailComponent }
   ] },
 
-  { path: AppRoutes.SHOPPING, component: ShoppingComponent }
+  { path: AppRoutes.SHOPPING, canActivate: [ AuthGuardService ], component: ShoppingComponent }
 ];
 
 
