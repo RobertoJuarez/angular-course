@@ -12,10 +12,14 @@ const APPLICATION_ROUTES: Routes = [
 
   { path: AppRoutes.HOME, component: HomeComponent },
 
-  { path: AppRoutes.RECIPES, component: RecipesComponent, children: [
-
-    { path: ':id', component: RecipeDetailComponent }
-  ] },
+  {
+    path: AppRoutes.RECIPES,
+    canActivateChild: [ AuthGuardService ],
+    component: RecipesComponent,
+    children: [
+      { path: ':id', component: RecipeDetailComponent }
+    ]
+  },
 
   { path: AppRoutes.SHOPPING, canActivate: [ AuthGuardService ], component: ShoppingComponent }
 ];

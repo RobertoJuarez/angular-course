@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../shared/base-component';
 import { AppRoutes } from '../app-routes';
+import { AuthGuardService } from '../shared/services/auth-guard.service';
+import { AuthService } from '../shared/services/auth.service';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { AppRoutes } from '../app-routes';
 export class HomeComponent extends BaseComponent implements OnInit {
 
 
-  constructor( private router: Router ) {
+  constructor( private router: Router, private authService: AuthService ) {
     super();
   }
 
@@ -30,6 +32,18 @@ export class HomeComponent extends BaseComponent implements OnInit {
   public goToShopping(): void {
 
     this.router.navigate( [ AppRoutes.SHOPPING ] );
+  }
+
+
+  public handleLoginButtonClick(): void {
+
+    this.authService.login();
+  }
+
+
+  public handleLogoutButtonClick(): void {
+
+    this.authService.logout();
   }
 
 }
