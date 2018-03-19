@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { CanDeactivateGuardService } from './shopping/shopping-edit/can-deactivate-guard.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
   providers: [
     ShoppingService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    CanDeactivateGuardService
   ],
   bootstrap: [AppComponent]
 })
