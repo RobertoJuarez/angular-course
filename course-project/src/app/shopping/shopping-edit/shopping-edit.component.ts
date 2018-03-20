@@ -7,15 +7,14 @@ import { IngredientDeletedEvent } from '../ingredient-deleted-event';
 import { ShoppingService } from '../shopping.service';
 import { Router } from '@angular/router';
 import { AppRoutes } from '../../app-routes';
-import { CanDeactivateComponent } from '../../shared/guards/can-deactivate-component';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent extends BaseComponent implements OnInit, CanDeactivateComponent {
+export class ShoppingEditComponent extends BaseComponent implements OnInit {
+
 
   @ViewChild( 'nameInput' )
   private nameInputRef: ElementRef;
@@ -23,14 +22,10 @@ export class ShoppingEditComponent extends BaseComponent implements OnInit, CanD
   @ViewChild( 'amountInput' )
   private amountInputRef: ElementRef;
 
-  private ingredientAdded: boolean;
-
 
   constructor( private shoppingService: ShoppingService,
                private router: Router ) {
     super();
-
-    this.ingredientAdded = false;
   }
 
 
@@ -49,8 +44,6 @@ export class ShoppingEditComponent extends BaseComponent implements OnInit, CanD
     const event: IngredientAddedEvent = new IngredientAddedEvent( ingredient );
 
     this.shoppingService.ingredientAddedEventEmitter.emit( event );
-
-    this.ingredientAdded = true;
 
     this.router.navigate( [ AppRoutes.RECIPES ] );
   }
@@ -75,16 +68,5 @@ export class ShoppingEditComponent extends BaseComponent implements OnInit, CanD
     this.shoppingService.ingredientListClearedEventEmitter.emit( new IngredientListClearedEvent() );
   }
 
-
-  public canDeactivate(): Observable< boolean> | Promise< boolean > | boolean {
-
-    if( this.ingredientAdded ) {
-
-      return true;
-    }else {
-
-      return confirm( 'Are you sure you want to leave without adding any ingredient?' );
-    }
-  }
 
 }
