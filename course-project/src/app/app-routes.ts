@@ -9,4 +9,8 @@ export class AppRoutes {
 
   public static SHOPPING = 'shopping';
 
+  public static NOT_FOUND = 'not-found';
+
+  public static ALL_OTHER = '**';
+
 }

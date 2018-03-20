@@ -7,6 +7,7 @@ import { RecipeDetailComponent } from '../recipes/recipe-detail/recipe-detail.co
 import { ShoppingComponent } from '../shopping/shopping.component';
 import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { CanDeactivateGuardService } from '../shopping/shopping-edit/can-deactivate-guard.service';
+import { ErrorComponent } from '../error/error.component';
 
 
 const APPLICATION_ROUTES: Routes = [
@@ -27,6 +28,17 @@ const APPLICATION_ROUTES: Routes = [
     canActivate: [ AuthGuardService ],
     canDeactivate: [ CanDeactivateGuardService ],
     component: ShoppingComponent
+  },
+
+  {
+    path: AppRoutes.NOT_FOUND,
+    component: ErrorComponent,
+    data: { message: 'The route you are trying to load is not defined anywhere man!' }
+  },
+
+  {
+    path: AppRoutes.ALL_OTHER,
+    redirectTo: '/not-found'
   }
 ];
 

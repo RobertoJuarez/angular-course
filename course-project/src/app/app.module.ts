@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { CanDeactivateGuardService } from './shopping/shopping-edit/can-deactivate-guard.service';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CanDeactivateGuardService } from './shopping/shopping-edit/can-deactiva
     HighlightDirective,
     UnlessDirective,
     DropdownDirective,
-    HomeComponent
+    HomeComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
