@@ -8,6 +8,7 @@ import { ShoppingComponent } from '../shopping/shopping.component';
 import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { CanDeactivateGuardService } from '../shopping/shopping-edit/can-deactivate-guard.service';
 import { ErrorComponent } from '../error/error.component';
+import { RecipeDetailResolverService } from '../recipes/recipe-detail/recipe-detail-resolver.service';
 
 
 const APPLICATION_ROUTES: Routes = [
@@ -19,7 +20,13 @@ const APPLICATION_ROUTES: Routes = [
     canActivateChild: [ AuthGuardService ],
     component: RecipesComponent,
     children: [
-      { path: ':id', component: RecipeDetailComponent }
+      {
+        path: ':id',
+        component: RecipeDetailComponent,
+        resolve: {
+          detail: RecipeDetailResolverService
+        }
+      }
     ]
   },
 

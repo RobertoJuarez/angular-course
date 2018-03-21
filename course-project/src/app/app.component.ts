@@ -7,7 +7,9 @@ import { LogService } from './shared/services/log.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [LogService]
+  providers: [
+    LogService
+  ]
 })
 export class AppComponent extends BaseComponent {
 

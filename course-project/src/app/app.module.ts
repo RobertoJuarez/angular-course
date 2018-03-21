@@ -20,6 +20,8 @@ import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { CanDeactivateGuardService } from './shopping/shopping-edit/can-deactivate-guard.service';
 import { ErrorComponent } from './error/error.component';
+import { RecipeService } from './recipes/recipe.service';
+import { RecipeDetailResolverService } from './recipes/recipe-detail/recipe-detail-resolver.service';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { ErrorComponent } from './error/error.component';
   ],
   providers: [
     ShoppingService,
+    RecipeService,
+    RecipeDetailResolverService,
     AuthService,
     AuthGuardService,
     CanDeactivateGuardService
