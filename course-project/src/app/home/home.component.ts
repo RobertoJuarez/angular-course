@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../shared/base-component';
 import { AppRoutes } from '../app-routes';
-import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { AuthService } from '../shared/services/auth.service';
+import { Subscription } from 'rxjs/Subscription';
+import { SimpleObservable } from '../shared/simple-observable';
 
 
 @Component({
@@ -14,12 +15,21 @@ import { AuthService } from '../shared/services/auth.service';
 export class HomeComponent extends BaseComponent implements OnInit {
 
 
+  private simpleObservableSubscription: Subscription;
+
+
   constructor( private router: Router, private authService: AuthService ) {
     super();
   }
 
 
   ngOnInit() {
+
+    this.simpleObservableSubscription = new SimpleObservable().theObservable.subscribe(
+      ( data: string ) => console.log( data),
+      ( error: string ) => console.log( error ),
+      () => console.log( 'simple observable completed !' )
+    );
   }
 
 
