@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BaseComponent } from '../shared/base-component';
 import { CanDeactivateComponent } from '../shared/guards/can-deactivate-component';
 import { Observable } from 'rxjs/Observable';
 import { ShoppingService } from './shopping.service';
+import { Router } from '@angular/router';
+import { AppRoutes } from '../app-routes';
+import { IngredientAddedEvent } from './ingredient-added-event';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -10,13 +14,15 @@ import { ShoppingService } from './shopping.service';
   templateUrl: './shopping.component.html',
   styleUrls: ['./shopping.component.css']
 })
-export class ShoppingComponent extends BaseComponent implements  OnInit, CanDeactivateComponent {
+export class ShoppingComponent extends BaseComponent implements  OnInit, CanDeactivateComponent, OnDestroy {
 
 
   private ingredientAdded: boolean;
 
+  private ingredientAddedEventSubscription: Subscription;
 
-  constructor( private shoppingService: ShoppingService ) {
+
+  constructor( private shoppingService: ShoppingService, private router: Router  ) {
     super();
 
     this.ingredientAdded = false;
@@ -25,7 +31,24 @@ export class ShoppingComponent extends BaseComponent implements  OnInit, CanDeac
 
   ngOnInit() {
 
-    this.shoppingService.ingredientAddedEventEmitter.subscribe( event => this.ingredientAdded = true );
+    this.ingredientAddedEventSubscription =
+      this.shoppingService.ingredientAddedEventSubject.subscribe( event => this.handleIngredientAddedEvent( event ) );
+  }
+
+
+  ngOnDestroy() {
+
+    this.ingredientAddedEventSubscription.unsubscribe();
+  }
+
+
+  private handleIngredientAddedEvent( event: IngredientAddedEvent ): void {
+
+    this.shoppingService.addIngredient( event.ingredient );
+
+    this.ingredientAdded = true;
+
+    this.router.navigate( [ AppRoutes.RECIPES ] );
   }
 
 

@@ -1,12 +1,11 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IngredientAddedEvent } from '../ingredient-added-event';
 import { BaseComponent } from '../../shared/base-component';
 import { IngredientModel } from '../../shared/ingredient-model';
 import { IngredientListClearedEvent } from '../ingredient-list-cleared-event';
 import { IngredientDeletedEvent } from '../ingredient-deleted-event';
 import { ShoppingService } from '../shopping.service';
-import { Router } from '@angular/router';
-import { AppRoutes } from '../../app-routes';
+
 
 @Component({
   selector: 'app-shopping-edit',
@@ -23,8 +22,7 @@ export class ShoppingEditComponent extends BaseComponent implements OnInit {
   private amountInputRef: ElementRef;
 
 
-  constructor( private shoppingService: ShoppingService,
-               private router: Router ) {
+  constructor( private shoppingService: ShoppingService ) {
     super();
   }
 
@@ -43,9 +41,7 @@ export class ShoppingEditComponent extends BaseComponent implements OnInit {
 
     const event: IngredientAddedEvent = new IngredientAddedEvent( ingredient );
 
-    this.shoppingService.ingredientAddedEventEmitter.emit( event );
-
-    this.router.navigate( [ AppRoutes.RECIPES ] );
+    this.shoppingService.ingredientAddedEventSubject.next( event );
   }
 
 
@@ -59,13 +55,13 @@ export class ShoppingEditComponent extends BaseComponent implements OnInit {
 
     const event: IngredientDeletedEvent = new IngredientDeletedEvent( ingredient );
 
-    this.shoppingService.ingredientDeletedEventEmitter.emit( event );
+    this.shoppingService.ingredientDeletedEventSubject.next( event );
   }
 
 
   public handleClearButtonClick(): void {
 
-    this.shoppingService.ingredientListClearedEventEmitter.emit( new IngredientListClearedEvent() );
+    this.shoppingService.ingredientListClearedEventSubject.next( new IngredientListClearedEvent() );
   }
 
 

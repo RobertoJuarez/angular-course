@@ -1,17 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IngredientModel } from '../../shared/ingredient-model';
 import { BaseComponent } from '../../shared/base-component';
 import { ShoppingService } from '../shopping.service';
 import { IngredientAddedEvent } from '../ingredient-added-event';
 import { IngredientDeletedEvent } from '../ingredient-deleted-event';
 import { IngredientListClearedEvent } from '../ingredient-list-cleared-event';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent extends BaseComponent implements OnInit {
+export class ShoppingListComponent extends BaseComponent implements OnInit, OnDestroy {
+
+
+  private ingredientDeletedEventSubscription: Subscription;
+
+  private ingredientListClearedEventSubscription: Subscription;
 
 
   constructor( private shoppingService: ShoppingService ) {
@@ -21,23 +27,25 @@ export class ShoppingListComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
 
-    this.shoppingService.ingredientAddedEventEmitter.subscribe( event => this.handleIngredientAddedEvent( event ) );
+    this.ingredientDeletedEventSubscription =
+      this.shoppingService.ingredientDeletedEventSubject.subscribe( event => this.handleIngredientDeletedEvent( event ) );
 
-    this.shoppingService.ingredientDeletedEventEmitter.subscribe( event => this.handleIngredientDeletedEvent( event ) );
+    this.ingredientListClearedEventSubscription =
+      this.shoppingService.ingredientListClearedEventSubject.subscribe( event => this.handleIngredientListClearedEvent( event ) );
+  }
 
-    this.shoppingService.ingredientListClearedEventEmitter.subscribe( event => this.handleIngredientListClearedEvent( event ) );
+
+  ngOnDestroy() {
+
+    this.ingredientDeletedEventSubscription.unsubscribe();
+
+    this.ingredientListClearedEventSubscription.unsubscribe();
   }
 
 
   get ingredients(): IngredientModel[] {
 
     return this.shoppingService.ingredients;
-  }
-
-
-  private handleIngredientAddedEvent( event: IngredientAddedEvent ): void {
-
-    this.shoppingService.addIngredient( event.ingredient );
   }
 
 

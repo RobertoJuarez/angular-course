@@ -1,8 +1,9 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IngredientModel } from '../shared/ingredient-model';
 import { IngredientAddedEvent } from './ingredient-added-event';
 import { IngredientDeletedEvent } from './ingredient-deleted-event';
 import { IngredientListClearedEvent } from './ingredient-list-cleared-event';
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
@@ -11,11 +12,11 @@ export class ShoppingService {
 
   private _ingredients: IngredientModel[];
 
-  private _ingredientAddedEventEmitter: EventEmitter< IngredientAddedEvent >;
+  private _ingredientAddedEventSubject: Subject< IngredientAddedEvent >;
 
-  private _ingredientDeletedEventEmitter: EventEmitter< IngredientDeletedEvent >;
+  private _ingredientDeletedEventSubject: Subject< IngredientDeletedEvent >;
 
-  private _ingredientListClearedEventEmitter: EventEmitter< IngredientListClearedEvent >;
+  private _ingredientListClearedEventSubject: Subject < IngredientListClearedEvent >;
 
 
 
@@ -23,11 +24,11 @@ export class ShoppingService {
 
     this._ingredients = [];
 
-    this._ingredientAddedEventEmitter = new EventEmitter< IngredientAddedEvent >();
+    this._ingredientAddedEventSubject = new Subject< IngredientAddedEvent >();
 
-    this._ingredientDeletedEventEmitter = new EventEmitter< IngredientDeletedEvent >();
+    this._ingredientDeletedEventSubject = new Subject< IngredientDeletedEvent>();
 
-    this._ingredientListClearedEventEmitter = new EventEmitter< IngredientListClearedEvent >();
+    this._ingredientListClearedEventSubject = new Subject< IngredientListClearedEvent >();
   }
 
 
@@ -70,24 +71,21 @@ export class ShoppingService {
   }
 
 
-  @Output( 'ingredientAddedEvent' )
-  get ingredientAddedEventEmitter(): EventEmitter< IngredientAddedEvent > {
+  get ingredientAddedEventSubject(): Subject<IngredientAddedEvent> {
 
-    return this._ingredientAddedEventEmitter;
+    return this._ingredientAddedEventSubject;
   }
 
 
-  @Output( 'ingredientDeletedEvent' )
-  get ingredientDeletedEventEmitter(): EventEmitter< IngredientDeletedEvent > {
+  get ingredientDeletedEventSubject(): Subject< IngredientDeletedEvent > {
 
-    return this._ingredientDeletedEventEmitter;
+    return this._ingredientDeletedEventSubject;
   }
 
 
-  @Output( 'ingredientListClearedEvent' )
-  get ingredientListClearedEventEmitter(): EventEmitter< IngredientListClearedEvent > {
+  get ingredientListClearedEventSubject(): Subject<IngredientListClearedEvent> {
 
-    return this._ingredientListClearedEventEmitter;
+    return this._ingredientListClearedEventSubject;
   }
 
 }

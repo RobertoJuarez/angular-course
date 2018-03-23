@@ -5,7 +5,7 @@ import { Observer } from 'rxjs/Observer';
 export class SimpleObservable {
 
 
-  private _theObservable: Observable;
+  private _theObservable: Observable< string >;
 
 
   constructor() {
@@ -27,7 +27,7 @@ export class SimpleObservable {
   }
 
 
-  public get theObservable(): Observable {
+  public get theObservable(): Observable< string > {
 
     return this._theObservable;
   }
