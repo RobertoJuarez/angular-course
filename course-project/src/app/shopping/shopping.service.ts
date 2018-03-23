@@ -4,13 +4,12 @@ import { IngredientAddedEvent } from './ingredient-added-event';
 import { IngredientDeletedEvent } from './ingredient-deleted-event';
 import { IngredientListClearedEvent } from './ingredient-list-cleared-event';
 import { Subject } from 'rxjs/Subject';
+import { ShoppingApiService } from './api/shopping-api.service';
 
 
 @Injectable()
 export class ShoppingService {
 
-
-  private _ingredients: IngredientModel[];
 
   private _ingredientAddedEventSubject: Subject< IngredientAddedEvent >;
 
@@ -20,9 +19,7 @@ export class ShoppingService {
 
 
 
-  constructor() {
-
-    this._ingredients = [];
+  constructor( private shoppingApiService: ShoppingApiService ) {
 
     this._ingredientAddedEventSubject = new Subject< IngredientAddedEvent >();
 
@@ -34,40 +31,24 @@ export class ShoppingService {
 
   get ingredients(): IngredientModel[] {
 
-    return this._ingredients.slice();
+    return [];
   }
 
 
   addIngredient( ingredient: IngredientModel ): void {
 
-    this._ingredients.push( ingredient );
+    this.shoppingApiService.add( ingredient ).subscribe(
+      ( response ) => console.log( response ),
+      ( error ) => console.log( error )
+    );
   }
 
 
   deleteIngredient( ingredient: IngredientModel ): void {
-
-    let ingredientIndex = -1;
-
-    for( let k = 0; k < this._ingredients.length; k++ ) {
-
-      if( this._ingredients[ k ].name === ingredient.name && this._ingredients[ k ].amount === ingredient.amount ) {
-
-        ingredientIndex = k;
-
-        break;
-      }
-    }
-
-    if( ingredientIndex > -1 ) {
-
-      this._ingredients.splice( ingredientIndex, 1 );
-    }
   }
 
 
   clearIngredients(): void {
-
-    this._ingredients = [];
   }
 
 

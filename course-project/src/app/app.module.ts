@@ -22,6 +22,8 @@ import { CanDeactivateGuardService } from './shopping/shopping-edit/can-deactiva
 import { ErrorComponent } from './error/error.component';
 import { RecipeService } from './recipes/recipe.service';
 import { RecipeDetailResolverService } from './recipes/recipe-detail/recipe-detail-resolver.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ShoppingApiService } from './shopping/api/shopping-api.service';
 
 
 @NgModule({
@@ -43,10 +45,12 @@ import { RecipeDetailResolverService } from './recipes/recipe-detail/recipe-deta
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     ShoppingService,
+    ShoppingApiService,
     RecipeService,
     RecipeDetailResolverService,
     AuthService,
