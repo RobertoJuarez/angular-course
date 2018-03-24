@@ -6,6 +6,7 @@
     style="cursor: pointer"
     *ngFor="let ingredient of this.ingredients">
     {{ingredient.name}} - {{ ingredient.amount}}
+    <button style="float: right" (click)="this.handleDeleteButtonClick( ingredient )">Delete</button>
   </a>
 
 </ul>

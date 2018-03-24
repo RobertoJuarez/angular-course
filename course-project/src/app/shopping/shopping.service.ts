@@ -5,6 +5,7 @@ import { IngredientDeletedEvent } from './ingredient-deleted-event';
 import { IngredientListClearedEvent } from './ingredient-list-cleared-event';
 import { Subject } from 'rxjs/Subject';
 import { ShoppingApiService } from './api/shopping-api.service';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -12,8 +13,6 @@ export class ShoppingService {
 
 
   private _ingredientAddedEventSubject: Subject< IngredientAddedEvent >;
-
-  private _ingredientDeletedEventSubject: Subject< IngredientDeletedEvent >;
 
   private _ingredientListClearedEventSubject: Subject < IngredientListClearedEvent >;
 
@@ -23,15 +22,13 @@ export class ShoppingService {
 
     this._ingredientAddedEventSubject = new Subject< IngredientAddedEvent >();
 
-    this._ingredientDeletedEventSubject = new Subject< IngredientDeletedEvent>();
-
     this._ingredientListClearedEventSubject = new Subject< IngredientListClearedEvent >();
   }
 
 
-  get ingredients(): IngredientModel[] {
+  get ingredients(): Observable< IngredientModel[] > {
 
-    return [];
+    return this.shoppingApiService.findAll();
   }
 
 
@@ -44,23 +41,21 @@ export class ShoppingService {
   }
 
 
-  deleteIngredient( ingredient: IngredientModel ): void {
+  deleteIngredient( ingredient: IngredientModel ): Observable< Response > {
+
+    return this.shoppingApiService.delete( ingredient );
   }
 
 
-  clearIngredients(): void {
+  clearIngredients(): Observable< Response > {
+
+    return this.shoppingApiService.deleteAll();
   }
 
 
   get ingredientAddedEventSubject(): Subject<IngredientAddedEvent> {
 
     return this._ingredientAddedEventSubject;
-  }
-
-
-  get ingredientDeletedEventSubject(): Subject< IngredientDeletedEvent > {
-
-    return this._ingredientDeletedEventSubject;
   }
 
 

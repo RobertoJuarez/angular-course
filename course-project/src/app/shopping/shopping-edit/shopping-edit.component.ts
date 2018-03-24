@@ -3,7 +3,6 @@ import { IngredientAddedEvent } from '../ingredient-added-event';
 import { BaseComponent } from '../../shared/base-component';
 import { IngredientModel } from '../../shared/ingredient-model';
 import { IngredientListClearedEvent } from '../ingredient-list-cleared-event';
-import { IngredientDeletedEvent } from '../ingredient-deleted-event';
 import { ShoppingService } from '../shopping.service';
 
 
@@ -42,20 +41,6 @@ export class ShoppingEditComponent extends BaseComponent implements OnInit {
     const event: IngredientAddedEvent = new IngredientAddedEvent( ingredient );
 
     this.shoppingService.ingredientAddedEventSubject.next( event );
-  }
-
-
-  public handleDeleteButtonClick(): void {
-
-    const ingredientName: string = this.nameInputRef.nativeElement.value;
-
-    const ingredientAmount: number = this.amountInputRef.nativeElement.value;
-
-    const ingredient: IngredientModel = new IngredientModel( ingredientName, ingredientAmount );
-
-    const event: IngredientDeletedEvent = new IngredientDeletedEvent( ingredient );
-
-    this.shoppingService.ingredientDeletedEventSubject.next( event );
   }
 
 
